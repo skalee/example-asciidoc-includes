@@ -17,7 +17,7 @@ jobs:
         run: gem install asciidoctor -v "~> 2.0"
 
       - name: Build README
-        run: asciidoctor README.adoc -o .github/README.html
+        run: asciidoctor --embedded README.adoc -o .github/README.html
 
       - name: Configure Git
         run: |
