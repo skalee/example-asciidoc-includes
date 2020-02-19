@@ -1,0 +1,2 @@
+IMPORTANT: This box has been included from `partial.adoc` file.
+If you can see it, all works.

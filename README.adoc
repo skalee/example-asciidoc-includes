@@ -1,0 +1,7 @@
+This example shows how to use AsciiDoctor's include directive in GitHub
+even though have disabled it.
+
+include::partial.adoc[]
+
+The trick is that README is processed by GitHub Actions.
+See link:.github/workflows/readme.yml[workflow configuration].
