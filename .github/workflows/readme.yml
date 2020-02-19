@@ -1,0 +1,39 @@
+name: Build README
+on: [push]
+
+jobs:
+  readme:
+    name: Build README
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.6"
+
+      - name: Install dependencies
+        run: gem install asciidoctor -v "~> 2.0"
+
+      - name: Build README
+        run: asciidoctor README.adoc -o .github/README.html
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "open.source@ribose.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit README
+        id: commit
+        run: |
+          git add -f .github/README.html
+          git commit -m "Build release dashboard"
+        continue-on-error: true
+
+      - name: Push changes
+        if: success()
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
